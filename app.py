@@ -79,8 +79,15 @@ def only_pdfs(items):
         if u.lower().endswith(".pdf") and u not in seen:
             seen.add(u)
             pdfs.append(i)
-    pdfs.sort(key=lambda i: i["announcementTime"])
+
+    # 按公告时间倒序排列：最新日期在最前面
+    pdfs.sort(
+        key=lambda i: i.get("announcementTime") or 0,
+        reverse=True
+    )
+
     return pdfs
+
 
 
 def ann_date(i):
